@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function grade(score){
+            let alpha_s;
+            if(score>=90){
+                alpha_s='A';
+            }
+            else if(score>=80){
+                alpha_s='B';
+            }
+            else if(score>=70){
+                alpha_s='C';
+            }
+            else if(score>=60){
+                alpha_s='D';
+            }
+            else {
+                alpha_s='F';
+            }
+            
+            document.write("<h1>입력 점수는 " + score +"는 "+alpha_s + " 학점입니다."+"</h1>");
+        }
+
+        let score = prompt("점수를입력하세요");
+        grade(score);
+        
+    </script>
+</body>
+</html>
