@@ -16,16 +16,80 @@
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
+        <script>
+            function GetCookie (name) {
+                let pairs = document.cookie.split(";"); // 쿠키문자열을 ;을 경계로 분할
+                for(let i=0; i<pairs.length; i++) {
+                    let pair = pairs[i].trim(); // 쿠키 앞뒤의 빈칸 제거
+                    let unit = pair.split("=");
+                    if(unit[0] == name)
+                        return unescape(unit[1]);
+                }
+                return null;
+            }
+            function SetCookie (name, value, expireDate) {
+                let cookieStr = name + "=" + escape(value) + 
+                    ((expireDate == null)?"":("; expires=" + expireDate.toUTCString()));
+                    document.cookie = cookieStr;
+            }
+            </script>
+
     </head>
     <body>
+        <script>
+            let name=GetCookie("username");
+            let count = GetCookie("count");
+            count = parseInt(count);
+            let username = prompt("이름을 입력해 주십시오.","");
+          
+            let expire = new Date (); // 현재 시간
+            if (username == null) {
+                count = 0;
+                username = prompt("이름을 입력해 주십시오.","");
+                if (username == null) {
+                    alert("이름을 입력하시면 보다 나은 서비스를 제공받을 수 있습니다.");
+                    username = "아무개";
+                  } 
+                
+                expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후   
+            }            
+
+            if( username == "아무개"||name!=username){
+                count=0;
+            }
+            
+            count++;
+
+            expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
+            SetCookie("count",count,expire);
+            SetCookie("username",username,expire);
+           
+        </script>
+
+        
         <!-- Background Video-->
-        <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="assets/mp4/bg.mp4" type="video/mp4" /></video>
+        <!--video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><source src="assets/mp4/bg.mp4" type="video/mp4" /></video-->
         <!-- Masthead-->
         <div class="masthead">
             <div class="masthead-content text-white">
                 <div class="container-fluid px-4 px-lg-0">
-                    <h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
-                    <p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p>
+                    
+                    <h1 class="fst-italic lh-1 mb-4">송이 오늘 뭐 입지?</h1>
+                    <hr>
+                    
+                    <script>
+                        if (count==1){
+                            document.write("<span style='font-size:30px;color: #7dabf0;;font-style: italic;'> &#127881;첫방문입니다&#127881; <br>");}
+
+                        document.write("<span style='font-size:30px;color:#7dabf0 ;font-style: italic;'>" + username + "</span>");
+                        document.write("<span style='font-size:30px;color: #fff;font-style: italic;'> 님 안녕하세요 </span><br>");
+                        document.write("<span style='font-size:30px;color: #7dabf0;;font-style: italic;'>" +count+ "</span>" )
+                        
+                        document.write("<span style='font-size:30px;color: #fff;font-style: italic;'>번째 방문을 환영합니다!</span>");
+                    </script>
+                
+                   
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
                     <!-- * * * * * * * * * * * * * * *-->
@@ -35,10 +99,35 @@
                     <!-- to get an API token!-->
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                         <!-- Email address input-->
-                        <div class="row input-group-newsletter">
-                            <div class="col"><input class="form-control" id="email" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                            <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
+                        <div class="row input-group-newsletter" style="background-color: aliceblue; color: black; padding: 10px; margin: 10px; border-radius: 5%; ">
+                            <form>
+                            <div style="padding: 10px;"><label for="goSchool" style="font-size: 20px;font-style: italic;font-weight: bold;">등교시간을 입력해주세요 &nbsp;</label>
+                                <select id="goSchool" name="goSchool" style="font-size: 20px;">
+                                    <option value="am9">am 9:00</option>
+                                    <option value="am10">am 10:00</option>
+                                    <option value="am11">am 11:00</option>
+                                    <option value="pm12">pm 12:00</option>
+                                    <option value="pm1">pm 1:00</option>
+                                    <option value="pm2">pm 2:00</option>
+                                    <option value="pm3">pm 3:00</option>
+                                    <option value="pm4">pm 4:00</option>
+                                </select>
+                            </div>
+        
+                            <div style="padding: 10px;"><label for="goHome" style="font-size: 20px;font-style: italic;font-weight: bold;">하교시간을 입력해주세요 &nbsp;</label>
+                                <select id="goHome" name="goHome" style="font-size: 20px;">
+                                    <option value="pm2">pm 2:00</option>
+                                    <option value="pm3">pm 3:00</option>
+                                    <option value="pm4">pm 4:00</option>
+                                    <option value="pm5">pm 5:00</option>
+                                    <option value="pm6">pm 6:00</option>
+                                    <option value="pm7">pm 7:00</option>
+                                    <option value="pm8">pm 8:00</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="col-auto"><button type="submit">submit!</button></div>
+                        </form>
                         <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
                         <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>
                         <!-- Submit success message-->
@@ -62,15 +151,29 @@
                 </div>
             </div>
         </div>
+        
         <!-- Social Icons-->
         <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
         <div class="social-icons">
             <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-instagram"></i></a>
+                <a onclick="location.href='map.html'" id="map" class="btn btn-dark m-3" href="#!">map</a>
+                <div class="btn btn-dark" id="current_date" style="font-size:20px;font-weight: bold;padding: 10px;margin: 5px; width: 200px;">
+                    <script>
+                        date = new Date();
+                        year = date.getFullYear();
+                        month = date.getMonth() + 1;
+                        day = date.getDate();
+                        document.getElementById("current_date").innerHTML = year+"년 "+month +"월 " + day + "일";
+                    </script>
+                </div>
+                
             </div>
+            
+    
         </div>
+        
+
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
@@ -78,7 +181,14 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- <div class="row input-group-newsletter">
+                            <div class="col"><input class="form-control" id="email" type="radio" placeholder="도착을 시간 입력해주세요" aria-label="Enter email address..." data-sb-validations="required,email" /></div>
+                            <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">도착!</button></div>
+                        </div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
     </body>
+    
 </html>
