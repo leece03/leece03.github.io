@@ -16,24 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
-
-        <script>
-            function GetCookie (name) {
-                let pairs = document.cookie.split(";"); // 쿠키문자열을 ;을 경계로 분할
-                for(let i=0; i<pairs.length; i++) {
-                    let pair = pairs[i].trim(); // 쿠키 앞뒤의 빈칸 제거
-                    let unit = pair.split("=");
-                    if(unit[0] == name)
-                        return unescape(unit[1]);
-                }
-                return null;
-            }
-            function SetCookie (name, value, expireDate) {
-                let cookieStr = name + "=" + escape(value) + 
-                    ((expireDate == null)?"":("; expires=" + expireDate.toUTCString()));
-                    document.cookie = cookieStr;
-            }
-            </script>
+        <script src="js/scripts.js"></script>
 
     </head>
     <body>
@@ -64,7 +47,6 @@
             expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 1년후 
             SetCookie("count",count,expire);
             SetCookie("username",username,expire);
-           
         </script>
 
         
@@ -89,64 +71,52 @@
                         document.write("<span style='font-size:30px;color: #fff;font-style: italic;'>번째 방문을 환영합니다!</span>");
                     </script>
                 
-                   
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                         <!-- Email address input-->
                         <div class="row input-group-newsletter" style="background-color: aliceblue; color: black; padding: 10px; margin: 10px; border-radius: 5%; ">
-                            <form>
+                            
                             <div style="padding: 10px;"><label for="goSchool" style="font-size: 20px;font-style: italic;font-weight: bold;">등교시간을 입력해주세요 &nbsp;</label>
                                 <select id="goSchool" name="goSchool" style="font-size: 20px;">
-                                    <option value="am9">am 9:00</option>
-                                    <option value="am10">am 10:00</option>
-                                    <option value="am11">am 11:00</option>
-                                    <option value="pm12">pm 12:00</option>
-                                    <option value="pm1">pm 1:00</option>
-                                    <option value="pm2">pm 2:00</option>
-                                    <option value="pm3">pm 3:00</option>
-                                    <option value="pm4">pm 4:00</option>
+                                    <option value="9">am 9:00</option>
+                                    <option value="10">am 10:00</option>
+                                    <option value="
+                                    
+                                    11">am 11:00</option>
+                                    <option value="12">pm 12:00</option>
+                                    <option value="13">pm 1:00</option>
+                                    <option value="14">pm 2:00</option>
+                                    <option value="15">pm 3:00</option>
+                                    <option value="16">pm 4:00</option>
                                 </select>
                             </div>
         
                             <div style="padding: 10px;"><label for="goHome" style="font-size: 20px;font-style: italic;font-weight: bold;">하교시간을 입력해주세요 &nbsp;</label>
-                                <select id="goHome" name="goHome" style="font-size: 20px;">
-                                    <option value="pm2">pm 2:00</option>
-                                    <option value="pm3">pm 3:00</option>
-                                    <option value="pm4">pm 4:00</option>
-                                    <option value="pm5">pm 5:00</option>
-                                    <option value="pm6">pm 6:00</option>
-                                    <option value="pm7">pm 7:00</option>
-                                    <option value="pm8">pm 8:00</option>
+                                <select id="goHome" name="goHome" style="font-size: 20px;" onchange="myfunction()">
+                                    <option value="14">pm 2:00</option>
+                                    <option value="15">pm 3:00</option>
+                                    <option value="16">pm 4:00</option>
+                                    <option value="17">pm 5:00</option>
+                                    <option value="18">pm 6:00</option>
+                                    <option value="19">pm 7:00</option>
+                                    <option value="20">pm 8:00</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-auto"><button type="submit">submit!</button></div>
-                        </form>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3 mt-2">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
+                        <script>
+                            window.onload = function myfunction() {
+                                let expire = new Date();
+                                expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 쿠키 만료 시간 설정
+
+                                let goHome = document.getElementById("goHome").options[document.getElementById("goHome").selectedIndex].value;
+                                SetCookie("goHome", goHome, expire);
+
+                                let goSchool = document.getElementById("goSchool").options[document.getElementById("goSchool").selectedIndex].value;
+                                SetCookie("goSchool", goSchool, expire);
+                            }
+                        </script>
+
+                        <div class="col-auto"><button type="button" onclick="location.href='main.html'" >submit!</button></div>
+                                           
                     </form>
                 </div>
             </div>
@@ -187,8 +157,8 @@
                         </div>
                         <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
                         <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         
     </body>
+    <footer style="font-size: 20px;">서울특별시 용산구 청파로47길 100</footer>
     
 </html>
