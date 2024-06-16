@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="js/scripts.js"></script>
+        <script>
+            function rain_alert(){
+                alert("비 예보가 있습니다");
+            }
+            function jacket_alert(){
+                alert("일교차가 10도 이상입니다");
+            }
+        </script>
+        <style>
+            body {
+                display: grid;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                
+                grid-template-columns: 1fr 1fr; /* 두 개의 컬럼 */
+                gap: 20px; /* 그리드 간격 */
+                justify-items: center; /* 가로 정렬 중앙 */
+                align-items: center; /* 세로 정렬 중앙 */
+                margin: 20px auto; /* 중앙 정렬 */
+                max-width: 1000px; /* 최대 너비 */
+            }
+            .item {
+                background-color: beige;
+                height: 600px;
+                width: 500px;
+                color: black;
+                text-align: center;
+                padding-top: 10px;
+                font-size: large;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .item img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+        </style>
+
+
+    </head>
+    <body>
+
+        <div class="masthead">
+            <div class="masthead-content text-white">
+                <div class="container-fluid px-4 px-lg-0" >
+                    <div class="container" >
+                        <div id="clothes" class="item"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-icons">
+
+            <div class="container" style="margin-top: 60px;">
+                <div id="items" class="item"></div>
+            </div>
+        </div>
+  
+        <script>
+            let min_temp,max_temp;
+            min_temp=GetCookie("min_temp");
+            max_temp=GetCookie("max_temp");
+            if (max_temp-min_temp>10){
+                let items=document.getElementById("items");
+                let node = document.createElement("img");
+                node.setAttribute("src", "clothes/jacket.png");
+                node.setAttribute("id", "jacket");
+                node.setAttribute("onclick", "jacket_alert()");
+                node.style.height = "70px";
+                items.appendChild(node);
+            }
+            let rainny=GetCookie("rainny");
+
+            if(rainny>0){
+                let items=document.getElementById("items");
+                let node = document.createElement("img");
+                node.setAttribute("src", "clothes/umbrella.png");
+                node.setAttribute("id", "umbrella");
+                node.setAttribute("onclick", "rain_alert()");
+                node.style.height = "150px";
+                items.appendChild(node);
+            }
+
+            if (max_temp>20){
+                let clothes=document.getElementById("clothes");
+                let node = document.createElement("img");
+                node.setAttribute("src", "clothes/short_shirt.png");
+                node.setAttribute("id", "short_shirt");
+                node.style.height = "150px";
+                clothes.appendChild(node);
+
+                clothes=document.getElementById("clothes");
+                node = document.createElement("img");
+                node.setAttribute("src", "clothes/short_pants.png");
+                node.setAttribute("id", "short_pants");
+                node.style.height = "150px";
+                clothes.appendChild(node);
+            }
+            else{
+                let clothes=document.getElementById("clothes");
+                let node = document.createElement("img");
+                node.setAttribute("src", "clothes/shirt.png");
+                node.setAttribute("id", "shirt");
+                node.style.height = "150px";
+                clothes.appendChild(node);
+
+                clothes=document.getElementById("clothes");
+                node = document.createElement("img");
+                node.setAttribute("src", "clothes/pants.png");
+                node.setAttribute("id", "pants");
+                node.style.height = "150px";
+                clothes.appendChild(node);
+            }
+
+            
+          
+        </script>
+        
+    </body>
