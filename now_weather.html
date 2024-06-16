@@ -67,6 +67,11 @@
                             rainny++;
                         }                
                     }
+                    let expire = new Date ();
+                    expire.setTime(expire.getTime() + (3600 * 1000)); //시간마다 쿠키 만료
+                    SetCookie ("rainny", rainny, expire);
+                    SetCookie ("max_temp", today_temperature[max], expire);
+                    SetCookie ("min_temp", today_temperature[min], expire);
                     const imgElement = document.createElement("img");
                     const imageContainer = document.getElementById("imgBox");
 
@@ -92,7 +97,7 @@
                     imgElement.style.height = 'auto'; 
                     imageContainer.innerHTML = '';
                     imageContainer.appendChild(imgElement);
-                    document.getElementById("explanation").innerHTML="<br><h4>최저 온도 : "+today_temperature[min]+"도 ("+ min+")시&nbsp;&nbsp;최고온도 : "+today_temperature[max] +"도 ("+max+"시)<hr>오늘의 날씨 : "+rainny+"</h4>";
+                    document.getElementById("explanation").innerHTML="<br><h5>최저 온도 : "+today_temperature[min]+"도 ("+ min+")시&nbsp;&nbsp;최고온도 : "+today_temperature[max] +"도 ("+max+"시)<hr>오늘의 날씨 : "+rainny+"</h5>";
 
                 </script>
             </div>
