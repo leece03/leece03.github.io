@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+    <script src="js/scripts.js"></script>
+    <style>
+        .row { width: 420px; margin: 0 auto; }
+        .row ul { list-style: none; margin: 0; padding: 0; }   
+        .row ul li { display: inline-table; }
+        #lightbox { position: fixed; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); top: 0; left: 0; display: none; }
+        #lightbox img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 5px solid #eee; }
+        
+        .masthead {
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #current_date {
+            text-decoration: underline;
+            text-decoration-color: #c6c7c8;
+        }
+        .masthead:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .masthead-content {
+            color: white;
+        }
+        table {
+            border-collapse: collapse;
+            width: 500px;
+        }
+        th {
+            padding: 20px;
+            border: 1px solid rgb(0, 0, 0);
+            width: 50px; 
+            height: 50px; 
+            background-color: black;
+            color: beige;
+            font-size: large;
+        }
+        td {
+            padding: 20px;
+            border: 1px solid rgb(0, 0, 0);
+            width: 150px; 
+            height: 50px; 
+            padding-left: 70px;
+        }
+        .social-icons {
+            position: relative;
+            z-index: 2;
+        }
+        .social-icons .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            height: 5rem;
+            width: 10rem;
+            border-radius: 40%;
+            font-size: 40px;
+            background-color: black;
+            color: white;
+        }
+        @media (min-width: 992px) {
+            .social-icons {
+                position: absolute;
+                height: 100px;
+                top: 150px;
+                right: 1.0rem;
+                width: auto;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var pics = document.getElementsByClassName("pic");
+            var lightbox = document.getElementById("lightbox");
+            var lightboxImage = document.getElementById("lightboxImage");
+
+            for (var i = 0; i < pics.length; i++) {
+                pics[i].addEventListener("click", showLightbox);
+            }
+
+            function showLightbox() {
+                var bigLocation = this.getAttribute("src");
+                lightboxImage.setAttribute("src", bigLocation);
+                lightbox.style.display = "block";
+            }
+
+            lightbox.onclick = function() {
+                lightbox.style.display = "none";
+            }
+        });
+    </script>
+</head>
+<body class="masthead" style="background-color: #2a5555;">
+    <table border="1" cellpadding="10" cellspacing="10" style="background-color: beige; color: black; width: 1000px; margin-top: 80px;">
+        <tbody>
+            <tr>
+                <th>반팔</th>
+                <td><img src="clothes/short_shirt.png" class="pic" style="height: 70px;"></td>
+                <td id="table12"></td>
+                <td id="table13"></td>
+                <td id="table14"></td>
+            </tr>
+            <tr>
+                <th>긴팔</th>
+                <td><img src="clothes/shirt.png" class="pic" style="height: 70px;"></td>
+                <td id="table22"></td>
+                <td id="table23"></td>
+                <td id="table24"></td>
+            </tr>
+            <tr>
+                <th>반바지</th>
+                <td><img src="clothes/short_pants.png" class="pic" style="height: 70px;"></td>
+                <td id="table32"></td>
+                <td id="table33"></td>
+                <td id="table34"></td>
+            </tr>
+            <tr>
+                <th>긴바지</th>
+                <td><img src="clothes/pants.png" class="pic" style="height: 70px;"></td>
+                <td id="table42"></td>
+                <td id="table43"></td>
+                <td id="table44"></td>
+            </tr>
+            <tr>
+                <th>아이템</th>
+                <td><img src="clothes/jacket.png" class="pic" style="height: 70px;"></td>
+                <td><img src="clothes/umbrella.png" class="pic" style="height: 70px;"></td>
+                <td id="table53"></td>
+                <td id="table54"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="lightbox">
+        <img src="" id="lightboxImage">
+    </div>
+    <div class="social-icons btn">
+        <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
+            <a onclick="showPrompt()" class="btn">옷 추가</a>
+            <script>
+                function showPrompt() {
+                    var url = prompt("url을 입력하세요:");
+                    let clothe = document.querySelector('input[type=radio][name="clothe"]:checked').value;
+                    let row = 0;
+                    let col = 0;
+                    if (clothe === "short_shirt") {
+                        row = 1;
+                        col = 2;
+                    } else if (clothe === "shirt") {
+                        row = 2;
+                        col = 2;
+                    } else if (clothe === "short_pants") {
+                        row = 3;
+                        col = 2;
+                    } else if (clothe === "pants") {
+                        row = 4;
+                        col = 2;
+                    } else {
+                        row = 5;
+                        col = 3;
+                    }
+                    
+                    let cell = document.getElementById("table" + row + col);
+                    let flag2 = 0;
+                    if (cell.getElementsByTagName('img').length > 0) {
+                        col++;
+                        cell = document.getElementById("table" + row + col);
+                        if (cell.getElementsByTagName('img').length > 0) {
+                            col++;
+                            cell = document.getElementById("table" + row + col);
+                            if (cell.getElementsByTagName('img').length > 0) {
+                                col++;
+                                cell = document.getElementById("table" + row + col);
+                                if (cell.getElementsByTagName('img').length > 0) {
+                                    alert("옷장이 꽉 찼습니다!");
+                                    flag2 = 1;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (flag2 == 0) {
+                        let node = document.createElement("img");
+                        node.setAttribute("src", url);
+                        node.style.height = "70px";
+                        cell.appendChild(node);
+                    }
+                }
+            </script>
+            <form style="background-color: rgb(0, 0, 0); margin-top: 20px; font-size: medium; border-radius: 10%; color: beige;">
+                <br>
+                <input type="radio" name="clothe" id="short_shirt" value="short_shirt"/>
+                <label for="short_shirt">반팔<br><br></label>
+                <input type="radio" name="clothe" id="shirt" value="shirt"/>
+                <label for="shirt">긴팔<br><br></label>
+                <input type="radio" name="clothe" id="short_pants" value="short_pants"/>
+                <label for="short_pants">반바지<br><br></label>
+                <input type="radio" name="clothe" id="pants" value="pants"/>
+                <label for="pants">바지<br><br></label>
+                <input type="radio" name="clothe" id="umbrella" value="umbrella"/>
+                <label for="umbrella">우산<br><br></label>
+                <input type="radio" name="clothe" id="jacket" value="jacket"/>
+                <label for="jacket">자켓<br><br></label>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
