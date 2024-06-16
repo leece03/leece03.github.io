@@ -14,6 +14,12 @@ function SetCookie (name, value, expireDate) {
         ((expireDate == null)?"":("; expires=" + expireDate.toUTCString()));
         document.cookie = cookieStr;
 }
+function GetRandomInt() {
+    return Math.floor(Math.random() * 3);
+  }
+function GetTemperature() {
+    return Math.floor(Math.random() * 20)+10;//최저 10도 최고 30도
+  }
 /*!
 * Start Bootstrap - Coming Soon v6.0.7 (https://startbootstrap.com/theme/coming-soon)
 * Copyright 2013-2023 Start Bootstrap

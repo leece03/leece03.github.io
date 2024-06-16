@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Coming Soon - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="js/scripts.js"></script>
+        <script>
+            let flag=GetCookie("flag");
+            if (flag==null){
+                let expire = new Date ();
+                expire.setTime(expire.getTime() + (3600 * 1000)); //시간마다 쿠키 만료
+                for( i=7;i<20;i++){
+                    let weather=GetRandomInt();
+                    SetCookie ("weather"+i, weather, expire);
+
+                    let temperature=GetTemperature();
+                    SetCookie ("temperature"+i, temperature, expire);
+                }
+                flag=1;
+                SetCookie ("flag", flag, expire);
+            }
+            //0은 비 1은 흐림 2는 맑음
+            
+        </script>
+        
+
+</head>
+<body>
+    <div class="masthead">
+        <div class="masthead-content text-white">
+            <div class="container-fluid px-4 px-lg-0">
+                <div id="imgBox" class="container-fluid" style="background-color: beige; height: 500px; width: 500px; margin: 10px;"></div>
+                <div id="explanation" class="container-fluid " style="color: black;  background-color: beige; height: 150px; width: 500px; margin: 10px;"></div>
+                
+                <script>
+                    let goHome=GetCookie("goHome");
+                    let goSchool=GetCookie("goSchool");
+                    let today_weather=[];
+                    let today_temperature=[];
+                    let max=100,min=0;
+                    today_temperature[0]=100;
+                    today_temperature[100]=0;
+                    let rainny=0;
+                    for(let i = Number(goSchool); i<= Number(goHome) ; i++){
+                        today_weather[i]=GetCookie("weather"+i);
+                        today_temperature[i]=GetCookie("temperature"+i);
+                        //console.log(today_temperature[i]);
+                        if (today_temperature[i]>today_temperature[max]){
+                            max=i;
+                        }
+                        if(today_temperature[min]>today_temperature[i]){
+                            min=i;
+                        }
+                        if(today_weather[i]==0){
+                            rainny++;
+                        }                
+                    }
+                    const imgElement = document.createElement("img");
+                    const imageContainer = document.getElementById("imgBox");
+
+                    if(rainny>4){
+                        rainny="장댓비";
+                        imgElement.src = 'icon/rainy.png';
+                    }
+                    else if(rainny>2){
+                        imgElement.src = 'icon/rain.png';
+                        rainny="소나기";
+                    }
+                    else if(rainny>0){
+                        imgElement.src = 'icon/rain_little.png';
+                        rainny="이슬비";
+                    }
+                    else{
+                        imgElement.src = 'icon/brightness.png';
+                        rainny="맑음";
+                    }
+                    imgElement.style.marginTop='50px';
+                    imgElement.style.marginLeft='30px';
+                    imgElement.style.width = '400px';  // 원하는 너비 설정
+                    imgElement.style.height = 'auto'; 
+                    imageContainer.innerHTML = '';
+                    imageContainer.appendChild(imgElement);
+                    document.getElementById("explanation").innerHTML="<br><h4>최저 온도 : "+today_temperature[min]+"도 ("+ min+")시&nbsp;&nbsp;최고온도 : "+today_temperature[max] +"도 ("+max+"시)<hr>오늘의 날씨 : "+rainny+"</h4>";
+
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="social-icons">
+        <div id="status" class="justify-content-center align-items-center" style="background-color: beige; height: 100px; width: 500px; margin-top: 300px; text-align: center; padding-top: 10px;" >
+            ff
+        </div>
+        <script>
+            let date = new Date();
+            let hours = ('0' + date.getHours()).slice(-2); 
+            let minutes = ('0' + date.getMinutes()).slice(-2);
+            
+            let goSchool_h=Number(goSchool)-hours- Math.ceil(minutes/60);
+            let goHome_h=Number(goHome)-hours- Math.ceil(minutes/60);
+            if(goSchool_h>0&&goHome_h>0){
+                document.getElementById("status").innerHTML="<h1>아직 등교전~</h1>";
+            }
+            else if(goSchool_h<0&&goHome_h>0){
+                document.getElementById("status").innerHTML="<h1>현재 등교중~</h1>";
+            }
+            else{
+                document.getElementById("status").innerHTML="<h1>현재 하교중~</h1>";
+            }
+        </script>
+    </div>
+
+    
+</body>
+<footer style="font-size: 20px;">서울특별시 용산구 청파로47길 100</footer>
+</html>
