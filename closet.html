@@ -17,8 +17,15 @@
         .row { width: 420px; margin: 0 auto; }
         .row ul { list-style: none; margin: 0; padding: 0; }   
         .row ul li { display: inline-table; }
-        #lightbox { position: fixed; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); top: 0; left: 0; display: none; }
-        #lightbox img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 5px solid #eee; }
+        #lightbox { 
+            position: fixed; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.7); top: 0; left: 0; 
+            display: none; 
+        }
+        #lightbox img { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 5px solid #eee; }
         
         .masthead {
             position: relative;
@@ -41,6 +48,7 @@
             left: 0;
             height: 100%;
             width: 100%;
+            z-index: -1;
         }
         .masthead-content {
             color: white;
@@ -52,7 +60,7 @@
         th {
             padding: 20px;
             border: 1px solid rgb(0, 0, 0);
-            width: 50px; 
+            width: 30px; 
             height: 50px; 
             background-color: black;
             color: beige;
@@ -91,71 +99,88 @@
             }
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var pics = document.getElementsByClassName("pic");
-            var lightbox = document.getElementById("lightbox");
-            var lightboxImage = document.getElementById("lightboxImage");
-
-            for (var i = 0; i < pics.length; i++) {
-                pics[i].addEventListener("click", showLightbox);
-            }
-
-            function showLightbox() {
-                var bigLocation = this.getAttribute("src");
-                lightboxImage.setAttribute("src", bigLocation);
-                lightbox.style.display = "block";
-            }
-
-            lightbox.onclick = function() {
-                lightbox.style.display = "none";
-            }
-        });
-    </script>
 </head>
-<body class="masthead" style="background-color: #2a5555;">
+<body class="masthead" style="background-color: #2a5555;" >
+    <div id="lightbox">
+        <img src="clothes/short_shirt.png" id="lightboxImage" width="400" height="400" style="background-color: beige;">
+    </div>
     <table border="1" cellpadding="10" cellspacing="10" style="background-color: beige; color: black; width: 1000px; margin-top: 80px;">
         <tbody>
             <tr>
                 <th>반팔</th>
-                <td><img src="clothes/short_shirt.png" class="pic" style="height: 70px;"></td>
+                <td id="table11"><img src="clothes/short_shirt.png" class="pic" style="height: 70px;"></td>
                 <td id="table12"></td>
                 <td id="table13"></td>
                 <td id="table14"></td>
             </tr>
             <tr>
                 <th>긴팔</th>
-                <td><img src="clothes/shirt.png" class="pic" style="height: 70px;"></td>
+                <td id="table21"><img src="clothes/shirt.png" class="pic" style="height: 70px;"></td>
                 <td id="table22"></td>
                 <td id="table23"></td>
                 <td id="table24"></td>
             </tr>
             <tr>
                 <th>반바지</th>
-                <td><img src="clothes/short_pants.png" class="pic" style="height: 70px;"></td>
+                <td id="table31"><img src="clothes/short_pants.png" class="pic" style="height: 70px;"></td>
                 <td id="table32"></td>
                 <td id="table33"></td>
                 <td id="table34"></td>
             </tr>
             <tr>
                 <th>긴바지</th>
-                <td><img src="clothes/pants.png" class="pic" style="height: 70px;"></td>
+                <td id="table41"><img src="clothes/pants.png" class="pic" style="height: 70px;" ></td>
                 <td id="table42"></td>
                 <td id="table43"></td>
                 <td id="table44"></td>
             </tr>
             <tr>
                 <th>아이템</th>
-                <td><img src="clothes/jacket.png" class="pic" style="height: 70px;"></td>
-                <td><img src="clothes/umbrella.png" class="pic" style="height: 70px;"></td>
+                <td id="table51"><img src="clothes/jacket.png" class="pic" style="height: 70px;"></td>
+                <td id="table52"><img src="clothes/umbrella.png" class="pic" style="height: 70px;"></td>
                 <td id="table53"></td>
                 <td id="table54"></td>
             </tr>
         </tbody>
     </table>
-    <div id="lightbox">
-        <img src="" id="lightboxImage">
-    </div>
+    <script>
+        var pics = document.querySelectorAll(".pic");
+        console.log(pics[1].getAttribute("src"));
+        var lightbox = document.getElementById("lightbox");
+        var lightboxImage = document.getElementById("lightboxImage");
+
+        function showLightbox() {
+            console.log("보이냐?");
+            console.log(document.getElementById("table"+12).getAttribute("src"));
+            var bigLocation = this.getAttribute("src");
+            lightboxImage.setAttribute("src", bigLocation);
+            lightbox.style.display = "block";
+        }
+
+        lightbox.onclick = function() {
+            lightbox.style.display = "none";
+        }
+        
+        for (var i = 0; i < pics.length; i++) {
+            pics[i].addEventListener("click", showLightbox);
+        }
+        /*
+        document.addEventListener('DOMContentLoaded', function() {
+            for (var i = 1; i < 6; i++) {
+                for (var j = 1; j < 5; j++) {
+                    var tableElement = document.getElementById("table" + i + j);
+                    if (tableElement) {
+                        tableElement.addEventListener("click", showLightbox, false); // 캡처링 or 버블링 여부 확인
+                    }
+                }
+            }
+        });*/
+
+        console.log(pics[1]);
+
+
+
+    </script>
     <div class="social-icons btn">
         <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
             <a onclick="showPrompt()" class="btn">옷 추가</a>

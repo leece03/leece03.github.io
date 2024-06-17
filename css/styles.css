@@ -10882,6 +10882,7 @@ video.bg-video {
   text-decoration-color: #c6c7c8;
 }
 .masthead:before {
+  z-index: -1;
   content: "";
   position: absolute;
   top: 0;
@@ -10889,8 +10890,10 @@ video.bg-video {
   right: 0;
   left: 0;
   height: 100%;
+
   width: 100%;
   background-color: rgba(0, 0, 0, 0.85);
+
 }
 .masthead .masthead-content {
   position: relative;
@@ -10927,6 +10930,7 @@ video.bg-video {
     width: 75vw;
     min-height: 0;
     padding-bottom: 0;
+    
   }
   .masthead:before {
     transform: skewX(-9deg);
