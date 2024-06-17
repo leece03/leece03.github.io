@@ -21,7 +21,7 @@
             if (flag==null){
                 let expire = new Date ();
                 expire.setTime(expire.getTime() + (3600 * 1000)); //시간마다 쿠키 만료
-                for( i=7;i<20;i++){
+                for( i=7;i<=21;i++){
                     let weather=GetRandomInt();
                     SetCookie ("weather"+i, weather, expire);
 
@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="social-icons">
-        <div id="status" class="justify-content-center align-items-center" style="background-color: beige; height: 100px; width: 500px; margin-top: 300px; text-align: center; padding-top: 10px;" >
+        <div id="status" class="justify-content-center align-items-center" style="border-radius: 10%; background-color: beige; height: 100px; width: 200px; margin-top: 300px; text-align: center; padding-top: 10px;" >
             ff
         </div>
         <script>
@@ -115,13 +115,13 @@
             let goSchool_h=Number(goSchool)-hours- Math.ceil(minutes/60);
             let goHome_h=Number(goHome)-hours- Math.ceil(minutes/60);
             if(goSchool_h>0&&goHome_h>0){
-                document.getElementById("status").innerHTML="<h1>아직 등교전~</h1>";
+                document.getElementById("status").innerHTML="<h1>등교전~</h1>";
             }
             else if(goSchool_h<0&&goHome_h>0){
-                document.getElementById("status").innerHTML="<h1>현재 등교중~</h1>";
+                document.getElementById("status").innerHTML="<h1>등교중~</h1>";
             }
             else{
-                document.getElementById("status").innerHTML="<h1>현재 하교중~</h1>";
+                document.getElementById("status").innerHTML="<h1>하교중~</h1>";
             }
         </script>
     </div>

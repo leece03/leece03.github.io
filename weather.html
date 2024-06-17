@@ -92,7 +92,7 @@
                             </div>
         
                             <div style="padding: 10px;"><label for="goHome" style="font-size: 20px;font-style: italic;font-weight: bold;">하교시간을 입력해주세요 &nbsp;</label>
-                                <select id="goHome" name="goHome" style="font-size: 20px;" onchange="myfunction()">
+                                <select id="goHome" name="goHome" style="font-size: 20px;">
                                     <option value="14">pm 2:00</option>
                                     <option value="15">pm 3:00</option>
                                     <option value="16">pm 4:00</option>
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <script>
-                            window.onload = function myfunction() {
+                            window.oninput = function myfunction() {
                                 let expire = new Date();
                                 expire.setTime(expire.getTime() + (365 * 24 * 3600 * 1000)); // 쿠키 만료 시간 설정
 
@@ -116,7 +116,7 @@
                             }
                         </script>
 
-                        <div class="col-auto"><button type="button" onclick="location.href='main.html'" >submit!</button></div>
+                        <div class="col-auto"><button type="button" onclick="location.href='main.html'" onclick="myfunction()" >submit!</button></div>
                                            
                     </form>
                 </div>

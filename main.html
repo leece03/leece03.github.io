@@ -49,8 +49,13 @@
                             let goSchool_h=goSchool-hours- Math.ceil(minutes/60);
 
                             let goSchool_m = Math.ceil(goSchool_h/60) * 60 - minutes;
+                            console.log(goHome)
+                            console.log(hours)
+                            console.log(minutes)
+                            console.log(Math.ceil(minutes/60))
                             
                             let goHome_h=goHome-hours- Math.ceil(minutes/60);
+                            console.log(goHome_h)
                             let goHome_m = Math.ceil(goHome_h/60) * 60 - minutes;
                             
 
@@ -72,9 +77,14 @@
         <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
          
         <div class="social-icons">
+            <script>
+                function my_function(){
+                    window.open("now_weather.html","","width=1000 height=800")
+                }
+            </script>
 
             <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-                <a onclick="location.href='now_weather.html'" id="now_weather" class="btn btn-dark m-3" href="#!" style="width: 250px;">청파동 날씨</a>
+                <a onclick="my_function()"id="now_weather" class="btn btn-dark m-3" href="#!" style="width: 250px;">청파동 날씨</a>
                 <a onclick="location.href='recommend.html'" id="recommend" class="btn btn-dark m-3" href="#!" style="width: 250px;">옷 추천</a>
                 <a onclick="location.href='closet.html'" id="closet" class="btn btn-dark m-3" href="#!" style="width: 250px;">나의 옷장</a>
                 
